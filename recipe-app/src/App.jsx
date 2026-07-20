@@ -3,6 +3,8 @@ import Home from './pages/Home';
 import RecipeDetail from './pages/RecipeDetail';
 import Favorites from './pages/Favorites';
 import Navbar from './components/Navbar';
+import ShoppingList from './pages/ShoppingList';
+
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/recipe/:id" element={<RecipeDetail />} />
          <Route path="/favorites" element={<Favorites />} /> 
+          <Route path="/shopping-list" element={<ShoppingList />} />
       </Routes>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { UtensilsCrossed, Heart, Dices, Loader2 } from 'lucide-react';
+import { UtensilsCrossed, Heart, Dices, Loader2, ShoppingBasket } from 'lucide-react';
 import { getRandomRecipe } from '../api/recipeApi';
 
 export default function Navbar() {
@@ -23,6 +23,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white border-b border-orange-100 p-4 sticky top-0 z-30 shadow-sm">
+
       <div className="max-w-6xl mx-auto flex items-center justify-between gap-2 md:gap-4">
         
         {/* Logo */}
@@ -53,6 +54,13 @@ export default function Navbar() {
             <Heart size={20} fill="currentColor" />
             <span className="hidden md:inline font-black uppercase tracking-tight">Favorites</span>
           </Link>
+          <Link 
+  to="/shopping-list" 
+  className="flex items-center gap-2 bg-white border-2 border-orange-100 text-orange-600 px-3 md:px-5 py-2.5 rounded-full font-bold hover:border-orange-500 transition-all shadow-sm"
+>
+  <ShoppingBasket size={20} />
+  <span className="hidden lg:inline uppercase tracking-tighter">Grocery List</span>
+</Link>
         </div>
       </div>
     </nav>
