@@ -4,18 +4,21 @@ import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  // Explicitly set base to '/' to ensure paths are generated correctly for Vercel
+  base: '/', 
   plugins: [
     react(),
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico.png', 'apple-touch-icon.png', 'mask-icon.svg'],
+      // Ensure this matches your actual filename in the public folder!
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'], 
       manifest: {
         name: 'RecipeChef - Digital Cookbook',
         short_name: 'RecipeChef',
         description: 'Search, save, and shop for your favorite food recipes.',
-        theme_color: '#f97316', // This is Tailwind's orange-500
-        background_color: '#fffaf8', // Matches your orange-50 background
+        theme_color: '#f97316',
+        background_color: '#fffaf8',
         display: 'standalone',
         icons: [
           {
@@ -37,7 +40,6 @@ export default defineConfig({
         ]
       },
       workbox: {
-        // Caches the API responses so recipes show up faster on second visit
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.origin === 'https://www.themealdb.com',
@@ -46,7 +48,7 @@ export default defineConfig({
               cacheName: 'api-cache',
               expiration: {
                 maxEntries: 100,
-                maxAgeSeconds: 60 * 60 * 24 * 7, // 1 week
+                maxAgeSeconds: 60 * 60 * 24 * 7,
               },
               cacheableResponse: {
                 statuses: [0, 200],
@@ -57,4 +59,8 @@ export default defineConfig({
       },
     })
   ],
+  // Clean up console logs for production (as we discussed before)
+  esbuild: {
+    drop: ['console', 'debugger'],
+  }
 })
